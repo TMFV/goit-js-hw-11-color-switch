@@ -16,34 +16,29 @@ const randomIntegerFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-let randomColor;
-
 //Функція для зміни кольору фону
+let randomColor;
 function setNewColor() {
     randomColor = colors[randomIntegerFromInterval(0, 5)];
-    console.log(randomColor);
     bodyRef.removeAttribute("style");
     bodyRef.setAttribute("style", `background-color: ${randomColor}`);
 };
-
-let colorInerval;
-
 //Початковий статус кнопок
 stopButtonRef.disabled = true;
 
+// Функція відстеження кнопок та роботи таймера інтевалу для зміни кольору фону
+let colorInerval;
+
 function buttonsFunctions(event, randomColor) { 
     if (event.target.textContent == "Start") {
-        console.log('start random');
         startButtonRef.disabled = true;
         stopButtonRef.disabled = false;
         colorInerval = setInterval(setNewColor, 1000);
         
     } else if (event.target.textContent == "Stop") {
-        console.log('stop random')
         startButtonRef.disabled = false;
         stopButtonRef.disabled = true;
         clearInterval(colorInerval);
     }
-
 };
 
